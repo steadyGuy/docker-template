@@ -1,0 +1,18 @@
+FROM node:16-alpine3.11
+
+WORKDIR /usr/src/app
+# https://github.com/vercel/next.js/discussions/16995
+COPY package.json /usr/src/app
+COPY yarn.lock /usr/src/app
+
+# Production use node instead of root
+# USER node
+
+RUN yarn install 
+# e--production
+
+COPY . /usr/src/app
+
+# RUN yarn build
+
+# CMD [ "yarn", "start" ]

@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  api:
+    command: yarn dev
+    volumes:
+      - ./api/src:/usr/src/app/src
+
+  auth:
+    command: yarn dev
+    volumes:
+      - ./auth/src:/usr/src/app/src
+
+  frontend:
+    command: yarn dev
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/usr/src/app
+    tty: true
+    stdin_open: true
+
+  nginx:
+    volumes:
+      - ./nginx/nginx.conf.dev:/etc/nginx/conf.d/nginx.conf
